@@ -55,3 +55,19 @@ SELECT parent.`type_id`,parent.`type_name`,COUNT(sub.`type_name`) AS `child_coun
             ON parent.`type_id` = sub.`parent_id`
                 GROUP BY parent.`type_name`
                 ORDER BY parent.`type_id`;
+
+
+SELECT `goods_id`,`goods_name` FROM `tdb_goods`
+    GROUP BY `goods_name`
+        HAVING COUNT(`goods_name`) >= 2
+    ORDER BY `goods_id`;
+
+
+DELETE t1 FROM `tdb_goods` AS t1
+    LEFT JOIN (SELECT `goods_id`,`goods_name` FROM `tdb_goods`
+                GROUP BY `goods_name` HAVING COUNT(`goods_name`) >= 2) AS t2
+        ON t1.`goods_name` = t2.`goods_name`
+            WHERE t1.`goods_id` > t2.`goods_id`;
+
+
+SELECT `goods_id`,`goods_name` FROM `tdb_goods`;
