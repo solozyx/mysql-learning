@@ -10,3 +10,5 @@ USE `test`;
 #查看当前在哪个数据库
 SELECT DATABASE();
 SHOW TABLES;
+
+SET NAMES GBK;
