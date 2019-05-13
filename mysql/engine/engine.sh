@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+SHOW CREATE TABLE `test`\G
+
+CREATE TABLE IF NOT EXISTS `test1`(
+    `s1` VARCHAR(10)
+) ENGINE=MyISAM;
+
+SHOW CREATE TABLE `test1`\G
+
+ALTER TABLE `test1` ENGINE = InnoDB;
+
+
+
