@@ -1,0 +1,62 @@
+
+CREATE TABLE `dep` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '部门ID',
+  `name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '部门名称',
+  `organization_id` int(11) NOT NULL DEFAULT '0' COMMENT '组织id',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index_name_orgid` (`name`,`organization_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='部门表';
+
+
+mysql> CREATE TABLE `dep` (
+    ->   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '部门ID',
+    ->   `name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '部门名称',
+    ->   `organization_id` int(11) NOT NULL DEFAULT '0' COMMENT '组织id',
+    ->   PRIMARY KEY (`id`),
+    ->   UNIQUE KEY `unique_index_name_orgid` (`name`,`organization_id`) USING BTREE
+    -> ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='部门表';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> show create table `dep`\G
+*************************** 1. row ***************************
+       Table: dep
+Create Table: CREATE TABLE `dep` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '部门ID',
+  `name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '部门名称',
+  `organization_id` int(11) NOT NULL DEFAULT '0' COMMENT '组织id',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index_name_orgid` (`name`,`organization_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='部门表'
+1 row in set (0.00 sec)
+
+mysql>
+
+insert dep (`name`,`organization_id`) values ('信用卡部',2);
+insert dep (`name`,`organization_id`) values ('信用卡部',3);
+insert dep (`name`,`organization_id`) values ('信用卡部',2);
+
+
+mysql> insert dep (`name`,`organization_id`) values ('信用卡部',2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert dep (`name`,`organization_id`) values ('信用卡部',3);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert dep (`name`,`organization_id`) values ('信用卡部',2);
+ERROR 1062 (23000): Duplicate entry '信用卡部-2' for key 'unique_index_name_orgid'
+mysql>
+mysql> select * from dep;
++----+--------------+-----------------+
+| id | name         | organization_id |
++----+--------------+-----------------+
+|  1 | 信用卡部     |               2 |
+|  2 | 信用卡部     |               3 |
++----+--------------+-----------------+
+2 rows in set (0.00 sec)
+
+mysql>
+
+mysql> drop table dep;
+Query OK, 0 rows affected (0.01 sec)
+mysql>
